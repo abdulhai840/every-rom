@@ -11,7 +11,7 @@ export default function Home() {
   console.log("data", data);
   return (
     <>
-      <h3 className="text-center">ROMs List</h3>
+      <h3 className="text-center"> List of Consoles</h3>
       {loading ? (
         <div className="spinner-border text-primary" role="status">
           <span className="visually-hidden">Loading...</span>
