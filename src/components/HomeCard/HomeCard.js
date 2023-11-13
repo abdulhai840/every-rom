@@ -1,19 +1,38 @@
 import { useNavigate } from "react-router-dom";
+import downloadImg from "../../assets/download.png";
 
-export default function HomeCard({ item, data }) {
+export default function HomeCard({ item, data, download }) {
   const navigate = useNavigate();
+  console.log('item', item);
   return (
     <div
-      className="card"
+      className="card "
       onClick={() =>
+        !download &&
         navigate("/roms/" + item?.id, {
           state: data,
         })
       }
+      role= {!download && "button"}
+      style={{ height: download ? "19rem" : "17rem" }}
     >
-      <img src={item?.imgUrl ?? ""} className="card-img-top" alt="..." />
-      <div className="card-body">
-        <h5 className="card-title">{item?.name ?? ""}</h5>
+      <img
+        src={item?.imgUrl ?? ""}
+        style={{
+          minHeight: "200px",
+          maxHeight: "200px",
+          padding: "0.5rem",
+          borderRadius: "8px",
+        }}
+        alt="..."
+      />
+      <div className="card-body d-flex flex-column justify-content-between align-items-center">
+        <h5 className="card-title text-center">{item?.name ?? ""}</h5>
+        {download && (
+          <a target="_blank" rel="noopener noreferrer" href={item?.downloadURL}>
+            <img src={downloadImg} width={30} alt="" />
+          </a>
+        )}
       </div>
     </div>
   );
