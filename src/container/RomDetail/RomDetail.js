@@ -86,8 +86,8 @@ export default function RomDetail() {
       <div>
         <div className="col-10 mx-auto row g-3">
           <h3 className="text-center py-3">
-            {state?.find((item) => params?.id === item?.id?.split("~")[0])
-              ?.id ?? ""}
+            {(state?.find((item) => params?.id === item?.id?.split("~")[0])
+              ?.id)?.split("~")[1] ?? ""}
           </h3>{" "}
           <div className="col-md-6 col-11 mx-auto py-3">
             <input
@@ -129,7 +129,7 @@ export default function RomDetail() {
                   filteredSortedArray?.map((item, index) => {
                     return (
                       <div
-                        className="col-md-4 col-12"
+                        className="col-md-4 col-12 py-3"
                         key={index}
                         ref={containerRef}
                         id={item?.name?.charAt(0)}
