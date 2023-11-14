@@ -3,13 +3,12 @@ import downloadImg from "../../assets/download.png";
 
 export default function HomeCard({ item, data, download }) {
   const navigate = useNavigate();
-  console.log('item', item);
   return (
     <div
       className="card "
       onClick={() =>
         !download &&
-        navigate("/roms/" + item?.id, {
+        navigate("/roms/" + item?.name, {
           state: data,
         })
       }
@@ -24,7 +23,7 @@ export default function HomeCard({ item, data, download }) {
           padding: "0.5rem",
           borderRadius: "8px",
         }}
-        alt="..."
+        alt=""
       />
       <div className="card-body d-flex flex-column justify-content-between align-items-center">
         <h5 className="card-title text-center">{item?.name ?? ""}</h5>

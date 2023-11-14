@@ -11,9 +11,9 @@ export default function RomDetail() {
   const [isSticky, setSticky] = useState(false);
   const [visible, setVisible] = useState(false);
   const containerRef = useRef(null);
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   const data = state?.find(
-    (item) => params?.id === item?.id?.split("~")[0]
+    (item) => params?.id === item?.id?.split("~")[1]
   )?.data;
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -65,29 +65,36 @@ export default function RomDetail() {
   }, []);
   return (
     <>
-      <div className="py-0">
-        <img src={headerImg} alt="" height={500} width={"100%"} />
-      </div>
-      <div
-        className={`py-3 divSticky ${isSticky ? "sticky" : ""}`}
-        style={{ backgroundColor: "#D0D4CA" }}
-      >
-        {alphabet.split("").map((letter) => (
-          <button
-            className="border-0 m-2 rounded text-center"
-            type="button"
-            onClick={() => handleClickScroll(letter)}
-            style={{ minWidth: "2rem" }}
-          >
-            {letter}
-          </button>
-        ))}
+      <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
+        <div className="py-0 d-flex justify-content-center">
+          <img src={headerImg} alt="" height={200} width={400} />
+        </div>
+        <div
+          style={{
+            backgroundColor: "#D0D4CA",
+            display: "flex",
+            justifyContent: "space-between",
+            overflowX: "auto",
+          }}
+        >
+          {alphabet.split("").map((letter) => (
+            <button
+              className="border-0 m-2 rounded text-center"
+              type="button"
+              onClick={() => handleClickScroll(letter)}
+              style={{ minWidth: "2rem" }}
+            >
+              {letter}
+            </button>
+          ))}
+        </div>
       </div>
       <div>
         <div className="col-10 mx-auto row g-3">
           <h3 className="text-center py-3">
-            {(state?.find((item) => params?.id === item?.id?.split("~")[0])
-              ?.id)?.split("~")[1] ?? ""}
+            {state
+              ?.find((item) => params?.id === item?.id?.split("~")[1])
+              ?.id?.split("~")[1] ?? ""}
           </h3>{" "}
           <div className="col-md-6 col-11 mx-auto py-3">
             <input
