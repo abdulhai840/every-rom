@@ -83,18 +83,25 @@ export default function RomDetail() {
     } else {
       setStateData(state);
     }
-  }, [newData, stateData]);
+  }, [newData, stateData,state]);
   return (
     <>
-      
       <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
         <div className="py-0 d-flex justify-content-center">
-          <img src={headerImg} alt="" height={400} width={"100%"} />
+          <img
+            src={headerImg}
+            alt=""
+            style={{ height: "20vh" }}
+            width={"100%"}
+          />
         </div>
         <div
           style={{
             backgroundColor: "#D0D4CA",
             textAlign: "center",
+            display: "flex",
+            justifyContent: "space-between",
+            overflowX: "auto",
           }}
         >
           {alphabet.split("").map((letter) => (

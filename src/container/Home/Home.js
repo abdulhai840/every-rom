@@ -66,28 +66,36 @@ export default function Home() {
   }, []);
   return (
     <>
-      <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
-        <div className="py-0 d-flex justify-content-center">
-          <img src={headerImg} alt="" height={400} width={"100%"} />
-        </div>
-        <div
-          style={{
-            backgroundColor: "#D0D4CA",
-            textAlign: "center",
-          }}
-        >
-          {alphabet.split("").map((letter) => (
-            <button
-              className="border-0 m-2 rounded text-center"
-              type="button"
-              onClick={() => handleClickScroll(letter)}
-              style={{ minWidth: "2rem" }}
-            >
-              {letter}
-            </button>
-          ))}
-        </div>
+    <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
+      <div className="py-0 d-flex justify-content-center">
+        <img
+          src={headerImg}
+          alt=""
+          style={{ height: "20vh" }}
+          width={"100%"}
+        />
       </div>
+      <div
+        style={{
+          backgroundColor: "#D0D4CA",
+          textAlign: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          overflowX: "auto",
+        }}
+      >
+        {alphabet.split("").map((letter) => (
+          <button
+            className="border-0 m-2 rounded text-center"
+            type="button"
+            onClick={() => handleClickScroll(letter)}
+            style={{ minWidth: "2rem" }}
+          >
+            {letter}
+          </button>
+        ))}
+      </div>
+    </div>
       <h3 className="text-center my-3"> List of Consoles</h3>
       <div className="col-md-6 col-11 mx-auto py-3">
         <input
