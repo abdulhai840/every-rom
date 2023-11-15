@@ -3,6 +3,7 @@ import useGoogleSheets from "use-google-sheets";
 import HomeCard from "../../components/HomeCard/HomeCard";
 import headerImg from "../../assets/header.jpg";
 import top from "../../assets/top.png";
+import Loader from "../../components/Loader/Loader";
 export default function Home() {
   const { data, loading, error, refetch } = useGoogleSheets({
     apiKey: "AIzaSyCOcflgsV7ljl6RsC_QVgo6Z27Ip6WxnrY",
@@ -67,14 +68,12 @@ export default function Home() {
     <>
       <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
         <div className="py-0 d-flex justify-content-center">
-          <img src={headerImg} alt="" height={200} width={400} />
+          <img src={headerImg} alt="" height={400} width={"100%"} />
         </div>
         <div
           style={{
             backgroundColor: "#D0D4CA",
-            display: "flex",
-            justifyContent: "space-between",
-            overflowX: "auto",
+            textAlign: "center",
           }}
         >
           {alphabet.split("").map((letter) => (
@@ -101,11 +100,7 @@ export default function Home() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: "center", margin: "2rem" }}>
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
+        <Loader />
       ) : (
         <>
           <div className="col-10 mx-auto row g-3">

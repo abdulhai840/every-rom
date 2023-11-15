@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import HomeCard from "../../components/HomeCard/HomeCard";
 import headerImg from "../../assets/header.jpg";
 import top from "../../assets/top.png";
+import useGoogleSheets from "use-google-sheets";
+import Loader from "../../components/Loader/Loader";
 
 export default function RomDetail() {
   const { state } = useLocation();
@@ -10,16 +12,27 @@ export default function RomDetail() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isSticky, setSticky] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [stateData, setStateData] = useState([]);
   const containerRef = useRef(null);
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  const data = state?.find(
+  const {
+    data: newData,
+    loading,
+    error,
+    refetch,
+  } = useGoogleSheets({
+    apiKey: "AIzaSyCOcflgsV7ljl6RsC_QVgo6Z27Ip6WxnrY",
+    sheetId: "17AcfUqr1LGfh1mBsmRBYlhqMEqWCRArUwGaNAs9BAC8",
+  });
+  const updated = state === null ? stateData : state;
+  const data = updated?.find(
     (item) => params?.id === item?.id?.split("~")[1]
   )?.data;
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     containerRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-  const filteredData = data?.filter((item) =>
+  const filteredData = updated?.filter((item) =>
     item?.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
   const filteredSortedArray = filteredData?.sort(function (a, b) {
@@ -63,18 +76,25 @@ export default function RomDetail() {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
+  console.log("state", state);
+  useEffect(() => {
+    if (state === null) {
+      setStateData(newData);
+    } else {
+      setStateData(state);
+    }
+  }, [newData, stateData]);
   return (
     <>
+      
       <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
         <div className="py-0 d-flex justify-content-center">
-          <img src={headerImg} alt="" height={200} width={400} />
+          <img src={headerImg} alt="" height={400} width={"100%"} />
         </div>
         <div
           style={{
             backgroundColor: "#D0D4CA",
-            display: "flex",
-            justifyContent: "space-between",
-            overflowX: "auto",
+            textAlign: "center",
           }}
         >
           {alphabet.split("").map((letter) => (
@@ -90,73 +110,77 @@ export default function RomDetail() {
         </div>
       </div>
       <div>
-        <div className="col-10 mx-auto row g-3">
-          <h3 className="text-center py-3">
-            {state
-              ?.find((item) => params?.id === item?.id?.split("~")[1])
-              ?.id?.split("~")[1] ?? ""}
-          </h3>{" "}
-          <div className="col-md-6 col-11 mx-auto py-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search..."
-              value={searchTerm}
-              onChange={handleSearch}
-            />
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="col-10 mx-auto row g-3">
+            <h3 className="text-center py-3">
+              {updated
+                ?.find((item) => params?.id === item?.id?.split("~")[1])
+                ?.id?.split("~")[1] ?? ""}
+            </h3>{" "}
+            <div className="col-md-6 col-11 mx-auto py-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+            </div>
+            <div className="row">
+              {searchTerm === "" ? (
+                <>
+                  {data?.length > 0 ? (
+                    data?.map((item, index) => {
+                      return (
+                        <div
+                          className="col-md-4 col-12 py-3"
+                          key={index}
+                          ref={containerRef}
+                          id={item?.name?.charAt(0)}
+                        >
+                          <HomeCard
+                            download={true}
+                            data={data}
+                            item={item}
+                            key={item?.id}
+                          />
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <h3 className="text-center py-3">No Data Found</h3>
+                  )}
+                </>
+              ) : (
+                <>
+                  {filteredSortedArray?.length > 0 ? (
+                    filteredSortedArray?.map((item, index) => {
+                      return (
+                        <div
+                          className="col-md-4 col-12 py-3"
+                          key={index}
+                          ref={containerRef}
+                          id={item?.name?.charAt(0)}
+                        >
+                          <HomeCard
+                            download={true}
+                            data={data}
+                            item={item}
+                            key={item?.id}
+                          />
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <h3 className="text-center py-3">No Data Found</h3>
+                  )}
+                </>
+              )}
+            </div>
           </div>
-          <div className="row">
-            {searchTerm === "" ? (
-              <>
-                {data?.length > 0 ? (
-                  data?.map((item, index) => {
-                    return (
-                      <div
-                        className="col-md-4 col-12 py-3"
-                        key={index}
-                        ref={containerRef}
-                        id={item?.name?.charAt(0)}
-                      >
-                        <HomeCard
-                          download={true}
-                          data={data}
-                          item={item}
-                          key={item?.id}
-                        />
-                      </div>
-                    );
-                  })
-                ) : (
-                  <h3 className="text-center py-3">No Data Found</h3>
-                )}
-              </>
-            ) : (
-              <>
-                {filteredSortedArray?.length > 0 ? (
-                  filteredSortedArray?.map((item, index) => {
-                    return (
-                      <div
-                        className="col-md-4 col-12 py-3"
-                        key={index}
-                        ref={containerRef}
-                        id={item?.name?.charAt(0)}
-                      >
-                        <HomeCard
-                          download={true}
-                          data={data}
-                          item={item}
-                          key={item?.id}
-                        />
-                      </div>
-                    );
-                  })
-                ) : (
-                  <h3 className="text-center py-3">No Data Found</h3>
-                )}
-              </>
-            )}
-          </div>
-        </div>
+        )}
       </div>
       {visible && (
         <button
