@@ -1,10 +1,10 @@
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import HomeCard from "../../components/HomeCard/HomeCard";
-import headerImg from "../../assets/header.jpg";
 import top from "../../assets/top.png";
 import useGoogleSheets from "use-google-sheets";
 import Loader from "../../components/Loader/Loader";
+import HeaderImage from "../../components/HeaderImage/HeaderImage";
 
 export default function RomDetail() {
   const { state } = useLocation();
@@ -87,14 +87,16 @@ export default function RomDetail() {
   return (
     <>
       <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
-        <div className="py-0 d-flex justify-content-center">
-          <img
-            src={headerImg}
-            alt=""
-            style={{ height: "20vh" }}
-            width={"100%"}
-          />
-        </div>
+        <HeaderImage/>
+            <div className="col-md-6 col-11 mx-auto py-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+            </div>
         <div
           style={{
             backgroundColor: "#D0D4CA",
@@ -126,15 +128,6 @@ export default function RomDetail() {
                 ?.find((item) => params?.id === item?.id?.split("~")[1])
                 ?.id?.split("~")[1] ?? ""}
             </h3>{" "}
-            <div className="col-md-6 col-11 mx-auto py-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search..."
-                value={searchTerm}
-                onChange={handleSearch}
-              />
-            </div>
             <div className="row">
               {searchTerm === "" ? (
                 <>

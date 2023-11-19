@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import useGoogleSheets from "use-google-sheets";
 import HomeCard from "../../components/HomeCard/HomeCard";
-import headerImg from "../../assets/header.jpg";
 import top from "../../assets/top.png";
 import Loader from "../../components/Loader/Loader";
+import HeaderImage from "../../components/HeaderImage/HeaderImage";
 export default function Home() {
   const { data, loading, error, refetch } = useGoogleSheets({
     apiKey: "AIzaSyCOcflgsV7ljl6RsC_QVgo6Z27Ip6WxnrY",
@@ -67,12 +67,14 @@ export default function Home() {
   return (
     <>
     <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
-      <div className="py-0 d-flex justify-content-center">
-        <img
-          src={headerImg}
-          alt=""
-          style={{ height: "20vh" }}
-          width={"100%"}
+      <HeaderImage/>
+      <div className="col-md-6 col-11 mx-auto py-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search consoles here..."
+          value={searchTerm}
+          onChange={handleSearch}
         />
       </div>
       <div
@@ -96,22 +98,13 @@ export default function Home() {
         ))}
       </div>
     </div>
-      <h3 className="text-center my-3"> List of Consoles</h3>
-      <div className="col-md-6 col-11 mx-auto py-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={handleSearch}
-        />
-      </div>
+      {/* <h3 className="text-center my-3"> List of Consoles</h3> */}
 
       {loading ? (
         <Loader />
       ) : (
         <>
-          <div className="col-10 mx-auto row g-3">
+          <div className="col-10 mx-auto row g-3 my-3">
             {searchTerm === "" ? (
               <>
                 {sortedArray?.length > 0 ? (
