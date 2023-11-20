@@ -29,7 +29,7 @@ export default function HomeCard({ item, data, download }) {
         <h5 className="card-title text-center">{item?.name ?? ""}</h5>
         {download && (
           <a target="_blank" rel="noopener noreferrer" href={item?.downloadURL}>
-            <img src={downloadImg} width={30} alt="" />
+            <img src={downloadImg} width={30} style={{borderRadius:"4px"}} alt="" />
           </a>
         )}
       </div>

@@ -32,7 +32,7 @@ export default function RomDetail() {
     setSearchTerm(e.target.value);
     containerRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-  const filteredData = updated?.filter((item) =>
+  const filteredData = data?.filter((item) =>
     item?.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
   const filteredSortedArray = filteredData?.sort(function (a, b) {
@@ -76,7 +76,6 @@ export default function RomDetail() {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
-  console.log("state", state);
   useEffect(() => {
     if (state === null) {
       setStateData(newData);

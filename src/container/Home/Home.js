@@ -12,7 +12,21 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [visible, setVisible] = useState(false);
   const [isSticky, setSticky] = useState(false);
-
+//   const [arrayData, setArrayData] =useState([]);
+// console.log('arraydata',arrayData);
+//   useEffect(()=>{
+// if(data){
+//   localStorage?.setItem("data", JSON.stringify(data))
+// }
+//   },[data])
+//   useEffect(()=>{
+// if(localStorage?.getItem("data")){
+//   setArrayData(localStorage?.getItem("data"))
+// }
+// else{
+//   setArrayData(data)
+// }
+//   },[arrayData,data,localStorage.getItem("data")])
   const containerRef = useRef(null);
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   const handleSearch = (e) => {
