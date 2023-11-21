@@ -4,6 +4,7 @@ import HomeCard from "../../components/HomeCard/HomeCard";
 import top from "../../assets/top.png";
 import Loader from "../../components/Loader/Loader";
 import HeaderImage from "../../components/HeaderImage/HeaderImage";
+import { Adsense } from "@ctrl/react-adsense";
 export default function Home() {
   const { data, loading, error, refetch } = useGoogleSheets({
     apiKey: "AIzaSyCOcflgsV7ljl6RsC_QVgo6Z27Ip6WxnrY",
@@ -12,21 +13,39 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [visible, setVisible] = useState(false);
   const [isSticky, setSticky] = useState(false);
-//   const [arrayData, setArrayData] =useState([]);
-// console.log('arraydata',arrayData);
-//   useEffect(()=>{
-// if(data){
-//   localStorage?.setItem("data", JSON.stringify(data))
-// }
-//   },[data])
-//   useEffect(()=>{
-// if(localStorage?.getItem("data")){
-//   setArrayData(localStorage?.getItem("data"))
-// }
-// else{
-//   setArrayData(data)
-// }
-//   },[arrayData,data,localStorage.getItem("data")])
+  //   const [arrayData, setArrayData] =useState([]);
+  // console.log('arraydata',arrayData);
+  //   useEffect(()=>{
+  // if(data){
+  //   localStorage?.setItem("data", JSON.stringify(data))
+  // }
+  //   },[data])
+  //   useEffect(()=>{
+  // if(localStorage?.getItem("data")){
+  //   setArrayData(localStorage?.getItem("data"))
+  // }
+  // else{
+  //   setArrayData(data)
+  // }
+  //   },[arrayData,data,localStorage.getItem("data")])
+  const loadAds = () => {
+    console.log("adss", window.adsbygoogle);
+    try {
+      if (
+        // typeof window !== "undefined" &&
+        window.adsbygoogle &&
+        !window.adsbygoogle.loaded
+      ) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
+    } catch (error) {
+      console.log("adsense error", error.message);
+    }
+  };
+
+  useEffect(() => {
+    loadAds();
+  }, []);
   const containerRef = useRef(null);
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   const handleSearch = (e) => {
@@ -79,102 +98,127 @@ export default function Home() {
     };
   }, []);
   return (
-    <>
-    <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
-      <HeaderImage/>
-      <div className="col-md-6 col-11 mx-auto py-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search consoles here..."
-          value={searchTerm}
-          onChange={handleSearch}
-        />
+    <div>
+      {/* <Adsense client="ca-pub-6000366931226304" slot="5314152846" /> */}
+      <div className="adparent">
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client="ca-pub-6000366931226304"
+          data-ad-slot="5314152846"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
       </div>
-      <div
-        style={{
-          backgroundColor: "#D0D4CA",
-          textAlign: "center",
-          display: "flex",
-          justifyContent: "space-between",
-          overflowX: "auto",
-        }}
+      {/* <amp-ad
+        width="100vw"
+        height="320"
+        type="adsense"
+        data-ad-client="ca-pub-6000366931226304"
+        data-ad-slot="5314152846"
+        data-auto-format="rspv"
+        data-full-width=""
       >
-        {alphabet.split("").map((letter) => (
-          <button
-            className="border-0 m-2 rounded text-center"
-            type="button"
-            onClick={() => handleClickScroll(letter)}
-            style={{ minWidth: "2rem" }}
-          >
-            {letter}
-          </button>
-        ))}
-      </div>
+        <div overflow=""></div>
+      </amp-ad> */}
     </div>
-      {/* <h3 className="text-center my-3"> List of Consoles</h3> */}
+    // <>
 
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <div className="col-10 mx-auto row g-3 my-3">
-            {searchTerm === "" ? (
-              <>
-                {sortedArray?.length > 0 ? (
-                  sortedArray?.map((item, index) => {
-                    return (
-                      <div
-                        ref={containerRef}
-                        className="col-md-4 col-12"
-                        key={index}
-                        id={item?.name?.charAt(0)}
-                      >
-                        <HomeCard item={item} data={data} />
-                      </div>
-                    );
-                  })
-                ) : (
-                  <h3 className="text-center py-3">No Data Found</h3>
-                )}
-              </>
-            ) : (
-              <>
-                {filteredSortedArray?.length > 0 ? (
-                  filteredSortedArray?.map((item, index) => {
-                    return (
-                      <div className="col-md-4 col-12 py-2" key={index}>
-                        <HomeCard item={item} data={data} />
-                      </div>
-                    );
-                  })
-                ) : (
-                  <h3 className="text-center py-3">No Data Found</h3>
-                )}
-              </>
-            )}
-          </div>
-          {visible && (
-            <button
-              onClick={() => {
-                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-              }}
-              style={{
-                position: "fixed",
-                fontSize: "20px",
-                bottom: "40px",
-                right: "40px",
-                textAlign: "center",
-                border: "none",
-                background: "none",
-              }}
-            >
-              {" "}
-              <img src={top} width={40} alt="" />
-            </button>
-          )}
-        </>
-      )}
-    </>
+    //   <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
+    //     <HeaderImage />
+    //     <div className="col-md-6 col-11 mx-auto py-3">
+    //       <input
+    //         type="text"
+    //         className="form-control"
+    //         placeholder="Search consoles here..."
+    //         value={searchTerm}
+    //         onChange={handleSearch}
+    //       />
+    //     </div>
+    //     <div
+    //       style={{
+    //         backgroundColor: "#D0D4CA",
+    //         textAlign: "center",
+    //         display: "flex",
+    //         justifyContent: "space-between",
+    //         overflowX: "auto",
+    //       }}
+    //     >
+    //       {alphabet.split("").map((letter) => (
+    //         <button
+    //           className="border-0 m-2 rounded text-center"
+    //           type="button"
+    //           onClick={() => handleClickScroll(letter)}
+    //           style={{ minWidth: "2rem" }}
+    //         >
+    //           {letter}
+    //         </button>
+    //       ))}
+    //     </div>
+    //   </div>
+    //   {/* <h3 className="text-center my-3"> List of Consoles</h3> */}
+
+    //   {loading ? (
+    //     <Loader />
+    //   ) : (
+    //     <>
+    //       <div className="col-10 mx-auto row g-3 my-3">
+    //         {searchTerm === "" ? (
+    //           <>
+    //             {sortedArray?.length > 0 ? (
+    //               sortedArray?.map((item, index) => {
+    //                 return (
+    //                   <div
+    //                     ref={containerRef}
+    //                     className="col-md-4 col-12"
+    //                     key={index}
+    //                     id={item?.name?.charAt(0)}
+    //                   >
+    //                     <HomeCard item={item} data={data} />
+    //                   </div>
+    //                 );
+    //               })
+    //             ) : (
+    //               <h3 className="text-center py-3">No Data Found</h3>
+    //             )}
+    //           </>
+    //         ) : (
+    //           <>
+    //             {filteredSortedArray?.length > 0 ? (
+    //               filteredSortedArray?.map((item, index) => {
+    //                 return (
+    //                   <div className="col-md-4 col-12 py-2" key={index}>
+    //                     <HomeCard item={item} data={data} />
+    //                   </div>
+    //                 );
+    //               })
+    //             ) : (
+    //               <h3 className="text-center py-3">No Data Found</h3>
+    //             )}
+    //           </>
+    //         )}
+    //       </div>
+    //       {visible && (
+    //         <button
+    //           onClick={() => {
+    //             window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    //           }}
+    //           style={{
+    //             position: "fixed",
+    //             fontSize: "20px",
+    //             bottom: "40px",
+    //             right: "40px",
+    //             textAlign: "center",
+    //             border: "none",
+    //             background: "none",
+    //           }}
+    //         >
+    //           {" "}
+    //           <img src={top} width={40} alt="" />
+    //         </button>
+    //       )}
+    //     </>
+    //   )}
+    // </>
   );
 }
