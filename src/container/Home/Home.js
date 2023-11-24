@@ -128,18 +128,17 @@ export default function Home() {
     // </div> */}
       <Adsense client="ca-pub-6000366931226304" slot="5314152846" />
 
-      {/* //     <amp-ad
-    //       width="100vw"
-    //       height="320"
-    //       type="adsense"
-    //       data-ad-client="ca-pub-6000366931226304"
-    //       data-ad-slot="5314152846"
-    //       data-auto-format="rspv"
-    //       data-full-width=""
-    //     >
-    //       <div overflow=""></div>
-    //     </amp-ad>
-    // <> */}
+      <amp-ad
+        width="100vw"
+        height="320"
+        type="adsense"
+        data-ad-client="ca-pub-6000366931226304"
+        data-ad-slot="5314152846"
+        data-auto-format="rspv"
+        data-full-width=""
+      >
+        <div overflow=""></div>
+      </amp-ad>
 
       <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
         <HeaderImage />
