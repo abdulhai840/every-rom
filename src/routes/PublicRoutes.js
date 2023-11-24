@@ -9,8 +9,8 @@ export default function PublicRoutes(params) {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/roms/:id" element={<RomDetail />} />
-          <Route path="/" element={<Navigate to="/home" replace />} />
-          <Route path="*" element={<Navigate to="/home" replace />} />
+          <Route path="/" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </>
