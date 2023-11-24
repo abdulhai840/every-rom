@@ -116,16 +116,16 @@ export default function Home() {
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, []);
   return (
-    <div>
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client="ca-pub-6000366931226304"
-        data-ad-slot="5314152846"
-        data-ad-format="auto"
-      ></ins>
-    </div>
-    // <Adsense client="ca-pub-6000366931226304" slot="5314152846" />
+    // <div>
+    //   <ins
+    //     className="adsbygoogle"
+    //     style={{ display: "block" }}
+    //     data-ad-client="ca-pub-6000366931226304"
+    //     data-ad-slot="5314152846"
+    //     data-ad-format="auto"
+    //   ></ins>
+    // </div>
+    <Adsense client="ca-pub-6000366931226304" slot="5314152846" />
 
     //     <amp-ad
     //       width="100vw"
