@@ -28,24 +28,24 @@ export default function Home() {
   //   setArrayData(data)
   // }
   //   },[arrayData,data,localStorage.getItem("data")])
-  const loadAds = () => {
-    console.log("adss", window.adsbygoogle);
-    try {
-      if (
-        // typeof window !== "undefined" &&
-        window.adsbygoogle &&
-        !window.adsbygoogle.loaded
-      ) {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      }
-    } catch (error) {
-      console.log("adsense error", error.message);
-    }
-  };
+  // const loadAds = () => {
+  //   console.log("adss", window.adsbygoogle);
+  //   try {
+  //     if (
+  //       // typeof window !== "undefined" &&
+  //       window.adsbygoogle &&
+  //       !window.adsbygoogle.loaded
+  //     ) {
+  //       (window.adsbygoogle = window.adsbygoogle || []).push({});
+  //     }
+  //   } catch (error) {
+  //     console.log("adsense error", error.message);
+  //   }
+  // };
 
-  useEffect(() => {
-    loadAds();
-  }, []);
+  // useEffect(() => {
+  //   loadAds();
+  // }, []);
   const containerRef = useRef(null);
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   const handleSearch = (e) => {
@@ -97,31 +97,47 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  useEffect(() => {
+    // Check if the AdSense script is already loaded
+    if (!window.adsbygoogle || !window.adsbygoogle.loaded) {
+      // Load AdSense script asynchronously
+      const script = document.createElement("script");
+      script.src =
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6000366931226304";
+      script.async = true;
+      document.body.appendChild(script);
+
+      // Set a flag indicating that the script has been loaded
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adsbygoogle.loaded = true;
+    }
+    console.log("add", window.adsbygoogle);
+    // Initialize AdSense
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
+  }, []);
   return (
     <div>
-      <Adsense client="ca-pub-6000366931226304" slot="5314152846" />
-      {/* <div className="adparent">
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-6000366931226304"
-          data-ad-slot="5314152846"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-      </div> */}
-      {/* <amp-ad
-        width="100vw"
-        height="320"
-        type="adsense"
-        data-ad-client="ca-pub-6000366931226304"
-        data-ad-slot="5314152846"
-        data-auto-format="rspv"
-        data-full-width=""
-      >
-        <div overflow=""></div>
-      </amp-ad> */}
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block" }}
+        data-ad-client="your_ad_client"
+        data-ad-slot="your_ad_slot"
+        data-ad-format="auto"
+      ></ins>
     </div>
+    // <Adsense client="ca-pub-6000366931226304" slot="5314152846" />
+
+    //     <amp-ad
+    //       width="100vw"
+    //       height="320"
+    //       type="adsense"
+    //       data-ad-client="ca-pub-6000366931226304"
+    //       data-ad-slot="5314152846"
+    //       data-auto-format="rspv"
+    //       data-full-width=""
+    //     >
+    //       <div overflow=""></div>
+    //     </amp-ad>
     // <>
 
     //   <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
