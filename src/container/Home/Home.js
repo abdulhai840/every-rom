@@ -99,8 +99,8 @@ export default function Home() {
   }, []);
   return (
     <div>
-      {/* <Adsense client="ca-pub-6000366931226304" slot="5314152846" /> */}
-      <div className="adparent">
+      <Adsense client="ca-pub-6000366931226304" slot="5314152846" />
+      {/* <div className="adparent">
         <ins
           className="adsbygoogle"
           style={{ display: "block" }}
@@ -109,7 +109,7 @@ export default function Home() {
           data-ad-format="auto"
           data-full-width-responsive="true"
         ></ins>
-      </div>
+      </div> */}
       {/* <amp-ad
         width="100vw"
         height="320"
