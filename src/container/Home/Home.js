@@ -116,7 +116,8 @@ export default function Home() {
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }, []);
   return (
-    // <div>
+    <>
+      {/* // <div>
     //   <ins
     //     className="adsbygoogle"
     //     style={{ display: "block" }}
@@ -124,10 +125,10 @@ export default function Home() {
     //     data-ad-slot="5314152846"
     //     data-ad-format="auto"
     //   ></ins>
-    // </div>
-    <Adsense client="ca-pub-6000366931226304" slot="5314152846" />
+    // </div> */}
+      <Adsense client="ca-pub-6000366931226304" slot="5314152846" />
 
-    //     <amp-ad
+      {/* //     <amp-ad
     //       width="100vw"
     //       height="320"
     //       type="adsense"
@@ -138,103 +139,103 @@ export default function Home() {
     //     >
     //       <div overflow=""></div>
     //     </amp-ad>
-    // <>
+    // <> */}
 
-    //   <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
-    //     <HeaderImage />
-    //     <div className="col-md-6 col-11 mx-auto py-3">
-    //       <input
-    //         type="text"
-    //         className="form-control"
-    //         placeholder="Search consoles here..."
-    //         value={searchTerm}
-    //         onChange={handleSearch}
-    //       />
-    //     </div>
-    //     <div
-    //       style={{
-    //         backgroundColor: "#D0D4CA",
-    //         textAlign: "center",
-    //         display: "flex",
-    //         justifyContent: "space-between",
-    //         overflowX: "auto",
-    //       }}
-    //     >
-    //       {alphabet.split("").map((letter) => (
-    //         <button
-    //           className="border-0 m-2 rounded text-center"
-    //           type="button"
-    //           onClick={() => handleClickScroll(letter)}
-    //           style={{ minWidth: "2rem" }}
-    //         >
-    //           {letter}
-    //         </button>
-    //       ))}
-    //     </div>
-    //   </div>
-    //   {/* <h3 className="text-center my-3"> List of Consoles</h3> */}
+      <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
+        <HeaderImage />
+        <div className="col-md-6 col-11 mx-auto py-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search consoles here..."
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+        </div>
+        <div
+          style={{
+            backgroundColor: "#D0D4CA",
+            textAlign: "center",
+            display: "flex",
+            justifyContent: "space-between",
+            overflowX: "auto",
+          }}
+        >
+          {alphabet.split("").map((letter) => (
+            <button
+              className="border-0 m-2 rounded text-center"
+              type="button"
+              onClick={() => handleClickScroll(letter)}
+              style={{ minWidth: "2rem" }}
+            >
+              {letter}
+            </button>
+          ))}
+        </div>
+      </div>
+      {/* <h3 className="text-center my-3"> List of Consoles</h3> */}
 
-    //   {loading ? (
-    //     <Loader />
-    //   ) : (
-    //     <>
-    //       <div className="col-10 mx-auto row g-3 my-3">
-    //         {searchTerm === "" ? (
-    //           <>
-    //             {sortedArray?.length > 0 ? (
-    //               sortedArray?.map((item, index) => {
-    //                 return (
-    //                   <div
-    //                     ref={containerRef}
-    //                     className="col-md-4 col-12"
-    //                     key={index}
-    //                     id={item?.name?.charAt(0)}
-    //                   >
-    //                     <HomeCard item={item} data={data} />
-    //                   </div>
-    //                 );
-    //               })
-    //             ) : (
-    //               <h3 className="text-center py-3">No Data Found</h3>
-    //             )}
-    //           </>
-    //         ) : (
-    //           <>
-    //             {filteredSortedArray?.length > 0 ? (
-    //               filteredSortedArray?.map((item, index) => {
-    //                 return (
-    //                   <div className="col-md-4 col-12 py-2" key={index}>
-    //                     <HomeCard item={item} data={data} />
-    //                   </div>
-    //                 );
-    //               })
-    //             ) : (
-    //               <h3 className="text-center py-3">No Data Found</h3>
-    //             )}
-    //           </>
-    //         )}
-    //       </div>
-    //       {visible && (
-    //         <button
-    //           onClick={() => {
-    //             window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    //           }}
-    //           style={{
-    //             position: "fixed",
-    //             fontSize: "20px",
-    //             bottom: "40px",
-    //             right: "40px",
-    //             textAlign: "center",
-    //             border: "none",
-    //             background: "none",
-    //           }}
-    //         >
-    //           {" "}
-    //           <img src={top} width={40} alt="" />
-    //         </button>
-    //       )}
-    //     </>
-    //   )}
-    // </>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className="col-10 mx-auto row g-3 my-3">
+            {searchTerm === "" ? (
+              <>
+                {sortedArray?.length > 0 ? (
+                  sortedArray?.map((item, index) => {
+                    return (
+                      <div
+                        ref={containerRef}
+                        className="col-md-4 col-12"
+                        key={index}
+                        id={item?.name?.charAt(0)}
+                      >
+                        <HomeCard item={item} data={data} />
+                      </div>
+                    );
+                  })
+                ) : (
+                  <h3 className="text-center py-3">No Data Found</h3>
+                )}
+              </>
+            ) : (
+              <>
+                {filteredSortedArray?.length > 0 ? (
+                  filteredSortedArray?.map((item, index) => {
+                    return (
+                      <div className="col-md-4 col-12 py-2" key={index}>
+                        <HomeCard item={item} data={data} />
+                      </div>
+                    );
+                  })
+                ) : (
+                  <h3 className="text-center py-3">No Data Found</h3>
+                )}
+              </>
+            )}
+          </div>
+          {visible && (
+            <button
+              onClick={() => {
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+              }}
+              style={{
+                position: "fixed",
+                fontSize: "20px",
+                bottom: "40px",
+                right: "40px",
+                textAlign: "center",
+                border: "none",
+                background: "none",
+              }}
+            >
+              {" "}
+              <img src={top} width={40} alt="" />
+            </button>
+          )}
+        </>
+      )}
+    </>
   );
 }
