@@ -126,7 +126,7 @@ export default function Home() {
           data-ad-format="auto"
         ></ins>
       </div>
-      <Adsense client="ca-pub-6000366931226304" slot="5314152846" />
+      {/* <Adsense client="ca-pub-6000366931226304" slot="5314152846" />
 
       <amp-ad
         width="100vw"
@@ -138,7 +138,7 @@ export default function Home() {
         data-full-width=""
       >
         <div overflow=""></div>
-      </amp-ad>
+      </amp-ad> */}
 
       <div className={` divSticky ${isSticky ? "sticky" : ""}`}>
         <HeaderImage />
