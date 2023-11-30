@@ -1,6 +1,7 @@
 {
   "name": "every-rom",
   "version": "0.1.0",
+  "homepage": "https://everyrom.online",
   "private": true,
   "dependencies": {
     "@ctrl/react-adsense": "^1.7.0",
